@@ -4,8 +4,22 @@ window.onload = function() {
         calculateNumShares();
         calculatePerquisiteTax();
         calculateProfitAndTax();
+        calculatePercentageProfit();
+        jumpTo("final-profit");
     });
 };
+
+function jumpTo(id) {
+    var url = location.href;
+    location.href = '#'+id;
+}
+
+function check() {
+    var lst = document.body.childNodes;
+    alert(lst.__proto__);
+    alert(lst[0]);
+    alert(lst[0].__proto__);
+}
 
 function getTaxBracket() {
     if (document.getElementById("tax-10").checked) {
@@ -46,16 +60,17 @@ function calculateNumShares (argument) {
     var rupeeValue = getNumber("rupee-value");
     var monthlyBase = getNumber("monthly-base");
     var contribution = getNumber("contribution");
-    var shareOffer = getNumber("share-offer");
-    var sharePurchase = getNumber("share-purchase");
+    var shareOfferPrice = getNumber("share-offer");
+    var sharePurchasePrice = getNumber("share-purchase");
+    var duration = getNumber("duration");
 
-    var minimumSharePrice = Math.min(sharePurchase, shareOffer);
+    var minimumSharePrice = Math.min(sharePurchasePrice, shareOfferPrice);
     insertIntoId("minimum-share-price", minimumSharePrice);
 
-    var effectiveSharePrice = minimumSharePrice*0.85;
+    var effectiveSharePrice = (minimumSharePrice*0.85).toFixed(2);
     insertIntoId("effective-share-price", effectiveSharePrice);
 
-    var numShares = Math.floor((monthlyBase*6*contribution/100)/(rupeeValue*effectiveSharePrice));
+    var numShares = Math.floor((monthlyBase*duration*contribution/100)/(rupeeValue*effectiveSharePrice));
     insertIntoId("num-shares", numShares);
 }
 
@@ -76,28 +91,30 @@ function calculatePerquisiteTax () {
 
 function calculateProfitAndTax (argument) {
     var minimumSharePrice = getNumber("minimum-share-price");
-    var sharePurchase = getNumber("share-purchase");
+    var sharePurchasePrice = getNumber("share-purchase");
     var numShares = getNumber("num-shares");
     var effectiveContribution = getNumber("effective-contribution");
     var rupeeValue = getNumber("rupee-value");
 
-    var effectiveRevenue = numShares*sharePurchase*rupeeValue;
+    var effectiveRevenue = numShares*sharePurchasePrice*rupeeValue;
     insertIntoId("share-sell", effectiveRevenue);
 
     var profit = effectiveRevenue - effectiveContribution;
     insertIntoId("profit", profit);
 
-    var tax = 0;
-    /*if (sharePurchase != minimumSharePrice) {
-        tax = 30*profit/100;
-    }
-    insertIntoId("tax-profit", tax);*/
-
-    var transactionFee = 20*rupeeValue;
+    var transactionFee = 45*rupeeValue;
     insertIntoId("transaction-fee", transactionFee);
 
     var perquisiteTax = getNumber("perquisite-tax");
 
-    var finalProfit = profit-tax-perquisiteTax-transactionFee;
+    var finalProfit = profit-perquisiteTax-transactionFee;
     insertIntoId("final-profit", finalProfit);
+}
+
+function calculatePercentageProfit() {
+    var cp = getNumber("effective-contribution");
+    var netProfit = getNumber("final-profit");
+
+    var percentageProfit = ((netProfit/cp)*100).toFixed(2);
+    insertIntoId("percentage-profit", percentageProfit);
 }

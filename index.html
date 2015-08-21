@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h2 class="text-center">Enter details</h2>       
+            <h2 class="text-center">Enter Details</h2>
         </div>
         <br>
         <h4>All figures should be in Rs/- except where stated otherwise.</h4>
@@ -26,7 +26,7 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">₹</div>
-                        <input class="form-control" type="text" name="monthly-base" id="monthly-base">
+                        <input class="form-control" type="text" name="monthly-base" id="monthly-base" value="100000">
                     </div>
                 </div>
                 <label class="control-label col-sm-7">
@@ -40,7 +40,7 @@
                 <label class="control-label col-sm-2" for="contribution">Contribution Percentage</label>
                 <div class="col-sm-3">
                     <div class="input-group">
-                        <input class="form-control" type="text" name="contribution" id="contribution" error="Contribution percentage">
+                        <input class="form-control" type="text" name="contribution" id="contribution" value="10">
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>
@@ -52,11 +52,26 @@
             </div>
 
             <div class="form-group">
+                <label class="control-label col-sm-2" for="contribution">Duration in Months</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon">#</div>
+                        <input class="form-control" type="text" name="duration" id="duration" value="6">
+                    </div>
+                </div>
+                <label class="control-label col-sm-7">
+                    <p class="text-muted text-left">
+                        Enter number of months in multiples of 6 (Offer duration).
+                    </p>
+                </label>
+            </div>
+
+            <div class="form-group">
                 <label class="control-label col-sm-2" for="share-open">Share Price on offer date</label>
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">$</div>
-                        <input class="form-control" type="text" name="share-open" id="share-offer">
+                        <input class="form-control" type="text" name="share-open" id="share-offer" value="52">
                     </div>
                 </div>
                 <label class="control-label col-sm-7">
@@ -71,7 +86,7 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">$</div>
-                        <input class="form-control" type="text" name="share-close" id="share-purchase">
+                        <input class="form-control" type="text" name="share-close" id="share-purchase" value="54">
                     </div>
                 </div>
                 <label class="control-label col-sm-7">
@@ -86,7 +101,7 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">₹</div>
-                        <input class="form-control" type="text" id="rupee-value">
+                        <input class="form-control" type="text" id="rupee-value" value="65">
                     </div>
                 </div>
                 <label class="control-label col-sm-7">
@@ -101,7 +116,7 @@
                 <div class="col-sm-3">
                     <div class="radio">
                         <label class="control-label radio-inline"><input type="radio" name="tax-bracket" value="10" id="tax-10">10%</label>
-                        <label class="control-label radio-inline"><input type="radio" name="tax-bracket" value="20" id="tax-20">20%</label>
+                        <label class="control-label radio-inline"><input type="radio" name="tax-bracket" value="20" id="tax-20" checked>20%</label>
                         <label class="control-label radio-inline"><input type="radio" name="tax-bracket" value="30" id="tax-30">30%</label>  
                     </div>  
                 </div>
@@ -114,7 +129,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-2">
-                    <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+                    <a class="btn btn-primary" id="submit">Submit</a>
                 </div>
             </div>
         </form>
@@ -211,21 +226,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Tax on selling shares</label>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <div class="input-group-addon">₹</div>
-                        <input disabled class="form-control" type="text" id="tax-profit" value="0">
-                    </div>
-                </div>
-                <label class="control-label col-sm-7">
-                    <p class="text-muted text-left">
-                        Should be 0 if you're selling the instant you get the shares
-                    </p>
-                </label>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Perquisite tax on 15% discount</label>
+                <label class="col-sm-2 control-label">Perquisite tax</label>
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">₹</div>
@@ -239,7 +240,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Transaction Fee at 20$</label>
+                <label class="col-sm-2 control-label">Transaction Fee at 45$</label>
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="input-group-addon">₹</div>
@@ -248,10 +249,11 @@
                 </div>
                 <label class="control-label col-sm-7">
                     <p class="text-muted text-left">
-                        <code></code>
+                        
                     </p>
                 </label>
             </div>
+            <hr>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Final Profit</label>
                 <div class="col-sm-3">
@@ -263,6 +265,20 @@
                 <label class="control-label col-sm-7">
                     <p class="text-muted text-left">
                         <code>profit-perquisiteTax-transactionFee</code>
+                    </p>
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Percentage Profit</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input disabled class="form-control" type="text" id="percentage-profit">
+                        <div class="input-group-addon">%</div>
+                    </div>
+                </div>
+                <label class="control-label col-sm-7">
+                    <p class="text-muted text-left">
+                        <code>(netProfit/effectiveContribution)*100</code>
                     </p>
                 </label>
             </div>
